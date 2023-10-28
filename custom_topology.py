@@ -3,7 +3,8 @@ from mininet.node import OVSSwitch, Controller
 from mininet.topo import Topo
 
 class CustomTopology(Topo):
-    def build(self):
+    def __init__(self):
+        Topo.__init__(self):
         # Add 3 switches to the topology
         switch1 = self.addSwitch('s1')
         switch2 = self.addSwitch('s2')
@@ -26,14 +27,5 @@ class CustomTopology(Topo):
         self.addLink(switch2, switch3)
 
 # Create Mininet network with the custom topology
-net = Mininet(topo=CustomTopology(), switch=OVSSwitch, controller=Controller)
+topos = {'first':(lambda:first())}
 
-# Start the network
-net.start()
-
-# You can now access and configure the network as needed
-# For example, you can open Mininet CLI:
-# net.interact()
-
-# Stop the network when you are done
-net.stop()
